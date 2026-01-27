@@ -37,15 +37,6 @@ st.write("🔥 THIS IS THE NEW VERSION 🔥")
 # =========================
 # LOGO BASE64
 # =========================
-logo_path = Path("/Users/test/Desktop/KIDNEY APP/logo.png")
-with open(logo_path, "rb") as f:
-    logo_base64 = base64.b64encode(f.read()).decode()
-
-if logo_path.exists():
-    with open(logo_path, "rb") as f:
-        logo_base64 = base64.b64encode(f.read()).decode()
-else:
-    logo_base64 = None
 
 
 # =========================
