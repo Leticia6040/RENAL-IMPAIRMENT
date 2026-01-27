@@ -36,7 +36,6 @@ def get_base64_image(image_path: Path):
 # Load logo
 logo_base64 = get_base64_image(logo_path)
 
-
 import joblib
 import shap
 import matplotlib.pyplot as plt
@@ -44,12 +43,7 @@ import matplotlib.pyplot as plt
 # =========================
 # PAGE CONFIG (MUST BE FIRST STREAMLIT COMMAND)
 # =========================
-st.set_page_config(page_title="CKD Dashboard", layout="wide")
-
-# =========================
-# NEW VERSION MESSAGE (optional)
-# =========================
-st.write("🔥 THIS IS THE NEW VERSION 🔥")
+st.set_page_config(page_title="CKD Dashboard", layout="wide)
 
 # =========================
 # LOGO BASE64
