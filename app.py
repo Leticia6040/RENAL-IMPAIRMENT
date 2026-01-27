@@ -12,6 +12,8 @@ import pandas as pd
 import numpy as np
 import base64
 from pathlib import Path
+BASE_DIR = Path(__file__).parent
+logo_path = BASE_DIR / "logo.png"
 import joblib
 import shap
 import matplotlib.pyplot as plt
@@ -32,6 +34,13 @@ st.write("🔥 THIS IS THE NEW VERSION 🔥")
 logo_path = Path("/Users/test/Desktop/KIDNEY APP/logo.png")
 with open(logo_path, "rb") as f:
     logo_base64 = base64.b64encode(f.read()).decode()
+
+if logo_path.exists():
+    with open(logo_path, "rb") as f:
+        logo_base64 = base64.b64encode(f.read()).decode()
+else:
+    logo_base64 = None
+
 
 # =========================
 # UI HEADER WITH LOGO
