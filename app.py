@@ -19,12 +19,6 @@ import matplotlib.pyplot as plt
 st.set_page_config(page_title="CKD Dashboard", layout="wide")
 
 # =========================
-# LOGO SETUP (STREAMLIT CLOUD SAFE)
-# =========================
-BASE_DIR = Path(__file__).parent
-LOGO_PATH = BASE_DIR / "logo.png"
-
-# =========================
 # HEADER STYLE
 # =========================
 st.markdown("""
@@ -47,27 +41,6 @@ st.markdown("""
 }
 </style>
 """, unsafe_allow_html=True)
-
-# =========================
-# HEADER WITH LOGO
-# =========================
-col1, col2 = st.columns([1, 6])
-
-with col1:
-    if LOGO_PATH.exists():
-        st.image(str(LOGO_PATH), width=90)
-
-with col2:
-    st.markdown(
-        "<div class='title-bar'><h4>Chronic Kidney Disease (CKD)</h4></div>",
-        unsafe_allow_html=True
-    )
-
-# =========================
-# SIDEBAR
-# =========================
-if LOGO_PATH.exists():
-    st.sidebar.image(str(LOGO_PATH), width=100)
 
 st.sidebar.header("📘 About the Model")
 st.sidebar.info(
