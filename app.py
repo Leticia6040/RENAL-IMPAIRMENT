@@ -18,11 +18,14 @@ logo_path = BASE_DIR / "logo.png"
 
 # Create base64 for HTML
 logo_base64 = ""
-if logo_path.exists():
-    with open(logo_path, "rb") as f:
-        logo_base64 = base64.b64encode(f.read()).decode()
+logo_base64 = get_base64_image(logo_path)
+
+if logo_base64:
+    st.markdown(f"""
+    <img src="data:image/png;base64,{logo_base64}" width="100">
+    """, unsafe_allow_html=True)
 else:
-    st.warning("Logo file not found")
+    st.warning("Logo not found")
 
 
 import joblib
