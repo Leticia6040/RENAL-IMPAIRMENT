@@ -19,8 +19,12 @@ import matplotlib.pyplot as plt
 st.set_page_config(page_title="CKD Dashboard", layout="wide")
 
 # =========================
-# HEADER STYLE
+# LOGO SETUP (CLOUD SAFE)
 # =========================
+BASE_DIR = Path(__file__).parent
+LOGO_PATH = BASE_DIR / "logo.png"
+
+
 st.markdown("""
 <style>
 .title-bar {
@@ -42,6 +46,22 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+col1, col2 = st.columns([1, 6])
+
+with col1:
+    if LOGO_PATH.exists():
+        st.image(str(LOGO_PATH), width=90)
+
+with col2:
+    st.markdown(
+        "<div class='title-bar'><h4>Chronic Kidney Disease (CKD)</h4></div>",
+        unsafe_allow_html=True
+    )
+
+
+if LOGO_PATH.exists():
+    st.sidebar.image(str(LOGO_PATH), width=100)
+
 st.sidebar.header("📘 About the Model")
 st.sidebar.info(
     "Predicts **CKD stage** in **PLHIV** using a **stacking ensemble** "
@@ -56,6 +76,7 @@ st.sidebar.markdown("""
 **Institution:** ACCRA TECHNICAL UNIVERSITY  
 **Year:** 2025  
 """)
+
 
 
 
