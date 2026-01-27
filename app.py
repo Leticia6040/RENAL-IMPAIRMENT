@@ -10,10 +10,16 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import base64
 from pathlib import Path
+# Get path relative to the app.py file
 BASE_DIR = Path(__file__).parent
 logo_path = BASE_DIR / "logo.png"
+# Display logo safely
+if logo_path.exists():
+    st.image(str(logo_path), width=150)  # display directly
+else:
+    st.warning("Logo file not found")
+
 import joblib
 import shap
 import matplotlib.pyplot as plt
