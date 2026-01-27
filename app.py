@@ -2,8 +2,6 @@
 # CKD STREAMLIT APP – PRODUCTION READY WITH FULL FEATURES
 # ===============================
 
-
-
 # =========================
 # IMPORTS
 # =========================
@@ -12,30 +10,6 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 import base64
-
-# =========================
-# LOGO SETUP (works locally & on Streamlit Cloud)
-# =========================
-
-# Get path relative to app.py
-BASE_DIR = Path(__file__).parent
-logo_path = BASE_DIR / "logo.png"
-
-def get_base64_image(image_path: Path):
-    """
-    Safely convert an image file to base64.
-    Returns None if the file doesn't exist.
-    """
-    if image_path.exists():
-        with open(image_path, "rb") as f:
-            return base64.b64encode(f.read()).decode()
-    else:
-        st.warning("Logo file not found!")
-        return None
-
-# Load logo
-logo_base64 = get_base64_image(logo_path)
-
 import joblib
 import shap
 import matplotlib.pyplot as plt
@@ -46,66 +20,76 @@ import matplotlib.pyplot as plt
 st.set_page_config(page_title="CKD Dashboard", layout="wide")
 
 # =========================
-# LOGO BASE64
+# LOGO SETUP (Cloud-safe)
 # =========================
+BASE_DIR = Path(__file__).parent
+LOGO_PATH = BASE_DIR / "logo.png"
 
+def get_base64_image(image_path: Path):
+    if image_path.exists():
+        with open(image_path, "rb") as f:
+            return base64.b64encode(f.read()).decode()
+    return None
+
+logo_base64 = get_base64_image(LOGO_PATH)
 
 # =========================
 # UI HEADER WITH LOGO
 # =========================
-st.markdown(f"""
-<style>
-.title-bar {{
-    display: flex;
-    align-items: center;
-    background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
-    color: white;
-    padding: 1.2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}}
-.title-bar img {{
-    border-radius: 10px;
-    margin-right: 20px;
-}}
-.title-bar h1 {{
-    font-size: 1.8rem;
-    margin-bottom: 0;
-}}
-.title-bar h4 {{
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: #dcdcdc;
-}}
-</style>
+if logo_base64:
+    st.markdown(f"""
+    <style>
+    .title-bar {{
+        display: flex;
+        align-items: center;
+        background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+        color: white;
+        padding: 1.2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }}
+    .title-bar img {{
+        border-radius: 10px;
+        margin-right: 20px;
+    }}
+    .title-bar h4 {{
+        font-size: 1.1rem;
+        font-weight: 400;
+        color: #dcdcdc;
+    }}
+    </style>
 
-<div class="title-bar">
-    <img src="data:image/png;base64,{logo_base64}" width="90">
-    <div>
-        <h4>Chronic Kidney Disease (CKD)</h4>
+    <div class="title-bar">
+        <img src="data:image/png;base64,{logo_base64}" width="90">
+        <div>
+            <h4>Chronic Kidney Disease (CKD)</h4>
+        </div>
     </div>
-</div>
-""", unsafe_allow_html=True)
-
-# =========================
-# Sidebar
-# =========================
-BASE_DIR = Path(__file__).parent
-logo_path = BASE_DIR / "logo.png"
-
-if logo_path.exists():
-    st.sidebar.image(str(logo_path), width=100)
+    """, unsafe_allow_html=True)
 else:
-    st.sidebar.warning("Logo file not found")
+    st.warning("Logo not found — running without logo")
+
+# =========================
+# SIDEBAR
+# =========================
+if LOGO_PATH.exists():
+    st.sidebar.image(str(LOGO_PATH), width=100)
+
 st.sidebar.header("📘 About the Model")
-st.sidebar.info("""Predicts **CKD stage** in **PLHIV** using a **stacking ensemble** (RF, GB, Logistic Regression).Developed for early kidney risk detection in clinical settings.""")
+st.sidebar.info(
+    "Predicts **CKD stage** in **PLHIV** using a **stacking ensemble** "
+    "(RF, GB, Logistic Regression). "
+    "Developed for early kidney risk detection in clinical settings."
+)
+
 st.sidebar.markdown("""
 ---
-**Developer:** [LETICIA MINTAH AGYEI]  
-**Supervisor:** [DR JOSEPH DADZIE]  
-**Institution:** [ACCRA TECHNICAL UNIVERSITY]  
+**Developer:** LETICIA MINTH AGYEI  
+**Supervisor:** DR JOSEPH DADZIE  
+**Institution:** ACCRA TECHNICAL UNIVERSITY  
 **Year:** 2025  
 """)
+
 
 
 
