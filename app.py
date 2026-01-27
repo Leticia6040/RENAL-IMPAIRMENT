@@ -24,19 +24,6 @@ if logo_path.exists():
 else:
     st.warning("Logo file not found")
 
-st.set_page_config(page_title="CKD Dashboard", layout="wide")
-st.write("🔥 THIS IS THE NEW VERSION 🔥")
-
-# Now your HTML will work
-st.markdown(f"""
-<div class="title-bar">
-    <img src="data:image/png;base64,{logo_base64}" width="90">
-    <div>
-        <h4>Chronic Kidney Disease (CKD)</h4>
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
 
 import joblib
 import shap
