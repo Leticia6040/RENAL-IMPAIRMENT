@@ -84,12 +84,15 @@ st.markdown(f"""
 # =========================
 # Sidebar
 # =========================
-st.sidebar.image("/Users/test/Desktop/KIDNEY APP/logo.png", width=100)
+BASE_DIR = Path(__file__).parent
+logo_path = BASE_DIR / "logo.png"
+
+if logo_path.exists():
+    st.sidebar.image(str(logo_path), width=100)
+else:
+    st.sidebar.warning("Logo file not found")
 st.sidebar.header("📘 About the Model")
-st.sidebar.info("""
-Predicts **CKD stage** in **PLHIV** using a **stacking ensemble** (RF, GB, Logistic Regression).
-Developed for early kidney risk detection in clinical settings.
-""")
+st.sidebar.info("""Predicts **CKD stage** in **PLHIV** using a **stacking ensemble** (RF, GB, Logistic Regression).Developed for early kidney risk detection in clinical settings.""")
 st.sidebar.markdown("""
 ---
 **Developer:** [LETICIA MINTAH AGYEI]  
