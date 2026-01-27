@@ -10,15 +10,33 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import base64
 from pathlib import Path
-# Get path relative to the app.py file
+
 BASE_DIR = Path(__file__).parent
 logo_path = BASE_DIR / "logo.png"
-# Display logo safely
+
+# Create base64 for HTML
+logo_base64 = ""
 if logo_path.exists():
-    st.image(str(logo_path), width=150)  # display directly
+    with open(logo_path, "rb") as f:
+        logo_base64 = base64.b64encode(f.read()).decode()
 else:
     st.warning("Logo file not found")
+
+st.set_page_config(page_title="CKD Dashboard", layout="wide")
+st.write("🔥 THIS IS THE NEW VERSION 🔥")
+
+# Now your HTML will work
+st.markdown(f"""
+<div class="title-bar">
+    <img src="data:image/png;base64,{logo_base64}" width="90">
+    <div>
+        <h4>Chronic Kidney Disease (CKD)</h4>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
 
 import joblib
 import shap
