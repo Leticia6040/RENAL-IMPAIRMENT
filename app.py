@@ -1,5 +1,5 @@
 # ===============================
-# CKD STREAMLIT APP – PRODUCTION READY WITH FULL FEATURES
+# CKD STREAMLIT APP – PRODUCTION READY
 # ===============================
 
 # =========================
@@ -19,13 +19,13 @@ import matplotlib.pyplot as plt
 st.set_page_config(page_title="CKD Dashboard", layout="wide")
 
 # =========================
-# LOGO SETUP (CLOUD SAFE)
+# LOGO SETUP (STREAMLIT CLOUD SAFE)
 # =========================
 BASE_DIR = Path(__file__).parent
 LOGO_PATH = BASE_DIR / "logo.png"
 
 # =========================
-# UI HEADER WITH LOGO
+# HEADER STYLE
 # =========================
 st.markdown("""
 <style>
@@ -48,6 +48,9 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# =========================
+# HEADER WITH LOGO
+# =========================
 col1, col2 = st.columns([1, 6])
 
 with col1:
@@ -80,7 +83,6 @@ st.sidebar.markdown("""
 **Institution:** ACCRA TECHNICAL UNIVERSITY  
 **Year:** 2025  
 """)
-
 
 
 
