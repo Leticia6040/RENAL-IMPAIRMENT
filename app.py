@@ -36,21 +36,6 @@ def get_base64_image(image_path: Path):
 # Load logo
 logo_base64 = get_base64_image(logo_path)
 
-# =========================
-# USE LOGO IN HEADER OR SIDEBAR
-# =========================
-if logo_base64:
-    st.markdown(f"""
-    <div style="display:flex; align-items:center;">
-        <img src="data:image/png;base64,{logo_base64}" width="100" style="margin-right:15px;">
-        <h2>Chronic Kidney Disease (CKD) Dashboard</h2>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.sidebar.image(str(logo_path), width=100)  # sidebar can just use path
-else:
-    st.sidebar.warning("Sidebar logo not found")
-
 
 import joblib
 import shap
