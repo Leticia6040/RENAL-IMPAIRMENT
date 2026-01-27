@@ -15,25 +15,19 @@ import matplotlib.pyplot as plt
 
 
 
+from pathlib import Path
+import streamlit as st
+
 # =========================
 # PAGE CONFIG (MUST BE FIRST STREAMLIT COMMAND)
 # =========================
 st.set_page_config(page_title="CKD Dashboard", layout="wide")
 
-# Relative path to logo inside repo
-LOGO_PATH = Path(__file__).parent / "logo.png"
-
-# Display logo in header
-if LOGO_PATH.exists():
-    st.image(str(LOGO_PATH), width=90)
-else:
-    st.warning("Logo file not found!")
-
-# Display logo in sidebar
-if LOGO_PATH.exists():
-    st.sidebar.image(str(LOGO_PATH), width=100)
-
-
+# =========================
+# LOGO SETUP (CLOUD SAFE)
+# =========================
+BASE_DIR = Path(__file__).parent
+LOGO_PATH = BASE_DIR / "logo.png"
 
 
 st.markdown("""
@@ -70,6 +64,7 @@ with col2:
     )
 
 
+
 if LOGO_PATH.exists():
     st.sidebar.image(str(LOGO_PATH), width=100)
 
@@ -87,7 +82,6 @@ st.sidebar.markdown("""
 **Institution:** ACCRA TECHNICAL UNIVERSITY  
 **Year:** 2025  
 """)
-
 
 
 
