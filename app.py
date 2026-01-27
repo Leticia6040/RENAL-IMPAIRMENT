@@ -1,5 +1,5 @@
 # ===============================
-# CKD STREAMLIT APP – CLOUD SAFE
+# CKD STREAMLIT APP – PRODUCTION READY WITH FULL FEATURES
 # ===============================
 
 # =========================
@@ -9,55 +9,65 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from pathlib import Path
+import base64
 import joblib
 import shap
 import matplotlib.pyplot as plt
 
 # =========================
-# PAGE CONFIG (MUST BE FIRST)
+# PAGE CONFIG (MUST BE FIRST STREAMLIT COMMAND)
 # =========================
 st.set_page_config(page_title="CKD Dashboard", layout="wide")
 
 # =========================
-# LOGO PATH (CLOUD SAFE)
+# LOGO SETUP (Cloud-safe)
 # =========================
 BASE_DIR = Path(__file__).parent
 LOGO_PATH = BASE_DIR / "logo.png"
 
+def get_base64_image(image_path: Path):
+    if image_path.exists():
+        with open(image_path, "rb") as f:
+            return base64.b64encode(f.read()).decode()
+    return None
+
+logo_base64 = get_base64_image(LOGO_PATH)
+
 # =========================
-# HEADER
+# UI HEADER WITH LOGO
 # =========================
-st.markdown("""
-<style>
-.title-bar {
-    display: flex;
-    align-items: center;
-    background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
-    color: white;
-    padding: 1.2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-.title-bar h4 {
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: #dcdcdc;
-    margin: 0;
-}
-</style>
-""", unsafe_allow_html=True)
+if logo_base64:
+    st.markdown(f"""
+    <style>
+    .title-bar {{
+        display: flex;
+        align-items: center;
+        background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+        color: white;
+        padding: 1.2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }}
+    .title-bar img {{
+        border-radius: 10px;
+        margin-right: 20px;
+    }}
+    .title-bar h4 {{
+        font-size: 1.1rem;
+        font-weight: 400;
+        color: #dcdcdc;
+    }}
+    </style>
 
-cols = st.columns([1, 6])
-
-with cols[0]:
-    if LOGO_PATH.exists():
-        st.image(str(LOGO_PATH), width=90)
-
-with cols[1]:
-    st.markdown(
-        "<div class='title-bar'><h4>Chronic Kidney Disease (CKD)</h4></div>",
-        unsafe_allow_html=True
-    )
+    <div class="title-bar">
+        <img src="data:image/png;base64,{logo_base64}" width="90">
+        <div>
+            <h4>Chronic Kidney Disease (CKD)</h4>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+else:
+    st.warning("Logo not found — running without logo")
 
 # =========================
 # SIDEBAR
@@ -79,6 +89,7 @@ st.sidebar.markdown("""
 **Institution:** ACCRA TECHNICAL UNIVERSITY  
 **Year:** 2025  
 """)
+
 
 
 
