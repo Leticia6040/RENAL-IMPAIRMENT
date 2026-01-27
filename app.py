@@ -43,7 +43,7 @@ import matplotlib.pyplot as plt
 # =========================
 # PAGE CONFIG (MUST BE FIRST STREAMLIT COMMAND)
 # =========================
-st.set_page_config(page_title="CKD Dashboard", layout="wide)
+st.set_page_config(page_title="CKD Dashboard", layout="wide")
 
 # =========================
 # LOGO BASE64
