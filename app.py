@@ -10,22 +10,46 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import base64
 from pathlib import Path
+import base64
 
+# =========================
+# LOGO SETUP (works locally & on Streamlit Cloud)
+# =========================
+
+# Get path relative to app.py
 BASE_DIR = Path(__file__).parent
 logo_path = BASE_DIR / "logo.png"
 
-# Create base64 for HTML
-logo_base64 = ""
+def get_base64_image(image_path: Path):
+    """
+    Safely convert an image file to base64.
+    Returns None if the file doesn't exist.
+    """
+    if image_path.exists():
+        with open(image_path, "rb") as f:
+            return base64.b64encode(f.read()).decode()
+    else:
+        st.warning("Logo file not found!")
+        return None
+
+# Load logo
 logo_base64 = get_base64_image(logo_path)
 
+# =========================
+# USE LOGO IN HEADER OR SIDEBAR
+# =========================
 if logo_base64:
     st.markdown(f"""
-    <img src="data:image/png;base64,{logo_base64}" width="100">
+    <div style="display:flex; align-items:center;">
+        <img src="data:image/png;base64,{logo_base64}" width="100" style="margin-right:15px;">
+        <h2>Chronic Kidney Disease (CKD) Dashboard</h2>
+    </div>
     """, unsafe_allow_html=True)
+
+    st.sidebar.image(str(logo_path), width=100)  # sidebar can just use path
 else:
-    st.warning("Logo not found")
+    st.sidebar.warning("Sidebar logo not found")
 
 
 import joblib
