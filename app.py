@@ -237,14 +237,6 @@ def build_input_df():
     return df_in
 
 
-# Load Logo
-logo_path = Path("/Users/test/Desktop/KIDNEY APP/logo.png")
-def get_base64_image(image_path):
-    with open(image_path, "rb") as f:
-        data = f.read()
-    return base64.b64encode(data).decode()
-logo_base64 = get_base64_image(logo_path)
-
 # -------------------------
 # Load Model & Scaler
 model = joblib.load("ckd_stage_stacking_model.pkl")
